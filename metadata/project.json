@@ -1,0 +1,32 @@
+{
+  "index": 370,
+  "phase": 2,
+  "batch": 42,
+  "name": "tensor-parse-json-lab",
+  "planned_name": "tensor-parse-json-lab",
+  "language": "Ruby",
+  "category": "Parsers",
+  "goal": "Implement a Ruby parsers project for json protocol validation, using framed sample traffic and bounds and ordering tests.",
+  "repository_url": "https://github.com/ZachL111/tensor-parse-json-lab",
+  "verification_command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+  "model": {
+    "inputs": [
+      "demand",
+      "capacity",
+      "latency",
+      "risk",
+      "weight"
+    ],
+    "threshold": 161,
+    "risk_penalty": 7,
+    "latency_penalty": 2,
+    "weight_bonus": 2,
+    "decision_rule": "accept when score is greater than or equal to threshold, otherwise review"
+  },
+  "quality_gates": [
+    "readme constraint scan",
+    "fixture presence check",
+    "metadata JSON parse",
+    "language verifier"
+  ]
+}
