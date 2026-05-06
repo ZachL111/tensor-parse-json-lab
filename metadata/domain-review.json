@@ -1,0 +1,73 @@
+{
+  "repo": "tensor-parse-json-lab",
+  "language": "Ruby",
+  "category": "Parsers",
+  "goal": "Implement a Ruby parsers project for json protocol validation, using framed sample traffic and bounds and ordering tests.",
+  "review_model": {
+    "terms": [
+      "token drift",
+      "grammar width",
+      "label quality",
+      "error locality"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "token drift",
+      "signal": 47,
+      "slack": 22,
+      "drag": 31,
+      "confidence": 73,
+      "score": 96,
+      "lane": "hold"
+    },
+    {
+      "name": "stress",
+      "focus": "grammar width",
+      "signal": 69,
+      "slack": 44,
+      "drag": 14,
+      "confidence": 64,
+      "score": 204,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "label quality",
+      "signal": 74,
+      "slack": 32,
+      "drag": 12,
+      "confidence": 49,
+      "score": 193,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "error locality",
+      "signal": 78,
+      "slack": 33,
+      "drag": 26,
+      "confidence": 46,
+      "score": 157,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "token drift",
+      "signal": 65,
+      "slack": 36,
+      "drag": 8,
+      "confidence": 82,
+      "score": 224,
+      "lane": "ship"
+    }
+  ]
+}

@@ -1,68 +1,40 @@
 # tensor-parse-json-lab
 
-`tensor-parse-json-lab` is a Ruby project for Parsers. It turns implement a Ruby parsers project for json protocol validation, using framed sample traffic and bounds and ordering tests into a small local model with readable fixtures and a direct verification command.
+`tensor-parse-json-lab` is a compact Ruby repository for parsers, centered on this goal: Implement a Ruby parsers project for json protocol validation, using framed sample traffic and bounds and ordering tests.
 
-## Reading Tensor Parse JSON Lab
+## Use Case
 
-Start with the README, then open `metadata/project.json` to check the constants behind the examples. After that, `fixtures/cases.csv` shows the compact path and `examples/extended_cases.csv` gives a wider look at the same rule.
+I want this repository to be useful as a quick reading exercise: fixtures first, implementation second, verifier last.
 
-## Design Sketch
+## Tensor Parse JSON Lab Review Notes
 
-The interesting part is the boundary between accepted and reviewed scenarios. Extended examples sit near that boundary so future edits can show whether the model became more permissive or more cautious. The Ruby code keeps the module small and leans on Minitest for direct fixture checks.
+For a quick review, compare `token drift` with `token drift` before reading the middle cases.
 
-## Purpose
+## Highlights
 
-The goal is to capture the core behavior in code and make the surrounding assumptions obvious. A reader should be able to run the verifier, open the fixtures, and understand why each decision was made.
+- `fixtures/domain_review.csv` adds cases for token drift and grammar width.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/tensor-parse-json-walkthrough.md` walks through the case spread.
+- The Ruby code includes a review path for `token drift` and `token drift`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## What It Does
+## Code Layout
 
-- Uses fixture data to keep error labels changes visible in code review.
-- Includes extended examples for grammar boundaries, including `recovery` and `degraded`.
-- Documents golden examples tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
+The fixture data drives the tests. The code stays thin, while `metadata/domain-review.json` and `config/review-profile.json` explain what each case is meant to protect.
 
-## Fixture Notes
+The Ruby implementation avoids hidden state so fixture changes are easy to reason about.
 
-`recovery` is the first example I would inspect because it lands on the `accept` path with a score of 184. The broader file also keeps `degraded` at -43 and `recovery` at 184, which gives the model a useful low-to-high spread.
-
-## Files Worth Reading
-
-- `lib`: library code
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-
-## Setup
-
-The only required setup is the local Ruby toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.
-
-## Usage
+## Run The Check
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Regression Path
 
-## Verification
+The verifier is intentionally local. It should fail if the fixture score math, lane assignment, or language-specific test drifts.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
+## Future Work
 
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Limits
-
-This code is local-first. It makes no claim about deployed usage and avoids credentials, hosted state, and environment-specific setup.
-
-## Next Directions
-
-- Add a comparison mode that shows how decisions change when one signal is adjusted.
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add one more parsers fixture that focuses on a malformed or borderline input.
+This remains a local project with deterministic fixtures. It does not depend on credentials, hosted services, or live data. Future work should add richer malformed inputs before widening the public API.
